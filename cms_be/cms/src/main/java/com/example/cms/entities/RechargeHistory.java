@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @ToString
 public class RechargeHistory {
-	@Column(name = "transaction_id")
+	@Column(name = "recharge_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long transactionId;

@@ -15,14 +15,9 @@ public class Cart {
 	@Column(name = "cart_id", nullable = false, unique = true)
 	private Long cartId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id", nullable = false)
-	private Order order;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("id")
-	@JoinColumn(name = "item_id", nullable = false)
-	private ItemMaster item;
+	@OneToOne
+	@JoinColumn(name = "item_id")
+	private ItemDaily item;
 
 	@Column(name = "qty_ordered", nullable = false)
 	private int qtyOrdered;

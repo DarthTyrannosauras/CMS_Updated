@@ -1,6 +1,7 @@
 package com.example.cms.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,9 +15,10 @@ import lombok.*;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_id", nullable = false, unique = true)
+	@Column(name = "order_id")
 	private Long orderId;
 
+	@Column(name = "order_time", nullable = false)
 	private LocalDateTime time;
 
 	@Column(name = "quantity")
@@ -28,8 +30,7 @@ public class Order {
 	@Column(name = "payment_method", nullable = false)
 	private PaymentMethod paymentMethod;
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "transaction_id", nullable = false, unique = true)
+	@Column(name = "transaction_id", nullable = false)
 	private String transactionId;
 
 	@Column(name = "items_served", nullable = false)
@@ -41,5 +42,9 @@ public class Order {
 
 	@Column(name = "discount_percentage", nullable = true)
 	private int discountPercentage;
+	
+	@OneToMany
+	@JoinColumn(name = "order_id")
+	private List<Cart> carts;
 
 }

@@ -1,6 +1,7 @@
 package com.example.cms.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,25 +18,33 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long studentId;
 
-	@Column(length = 20, name = "name")
+	@Column(length = 60, name = "name", nullable = false)
 	private String name;
 
-	@Column(length = 40, name = "email")
+	@Column(length = 40, name = "email", unique = true, nullable = false)
 	private String email;
 
-	@Column(length = 20, name = "password")
+	@Column(length = 20, name = "password", nullable = false)
 	private String password;
 
-	@Column(length = 10, name = "mobile_no")
+	@Column(length = 10, name = "mobile_no", unique = true, nullable = false)
 	private String mobileNo;
 
-	@Column(length = 20, name = "balance")
+	@Column(name = "balance", nullable = false)
 	private int balance;
 
-	@Column(length = 20, name = "dob")
+	@Column(name = "dob")
 	private LocalDate dob;
 
-	@Column(length = 20, name = "course_name")
+	@Column(name = "course_name")
 	private Course courseName;
+	
+	@OneToMany
+	@JoinColumn(name = "student_id")
+	private List<Order> orders;
+	
+	@OneToMany
+	@JoinColumn(name = "student_id")
+	private List<RechargeHistory> rechargeHis;
 
 }
